@@ -1,5 +1,6 @@
-import { BAD_REQUEST } from '@/constants/http-status'
 import { RequestHandler } from 'express'
+
+import { BAD_REQUEST } from '@/constants/http-status'
 import createHttpError from 'http-errors'
 import { ZodError, ZodSchema } from 'zod'
 

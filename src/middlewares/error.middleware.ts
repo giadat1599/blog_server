@@ -1,5 +1,6 @@
-import { INTERNAL_SERVER_ERROR } from '@/constants/http-status'
 import { ErrorRequestHandler } from 'express'
+
+import { INTERNAL_SERVER_ERROR } from '@/constants/http-status'
 import { isHttpError } from 'http-errors'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

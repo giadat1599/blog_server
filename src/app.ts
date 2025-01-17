@@ -1,9 +1,12 @@
-import createApp from './lib/create-app'
-import errorHandler from './middlewares/error.middleware'
-import notFoundHandler from './middlewares/not-found.middleware'
-import userRoutes from '@/routes/user.route'
-import requestID from 'express-request-id'
 import cors from 'cors'
+import requestID from 'express-request-id'
+
+import errorHandler from '@/middlewares/error.middleware'
+import notFoundHandler from '@/middlewares/not-found.middleware'
+
+import userRoutes from '@/routes/user.route'
+
+import createApp from '@/lib/create-app'
 
 const app = createApp()
 
