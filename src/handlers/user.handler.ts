@@ -1,8 +1,10 @@
 import { RequestHandler } from 'express'
 
-export const getUser: RequestHandler = (req, res) => {
-  console.log(req.id)
+import dbClient from '@/db/db-client'
+
+export const getUser: RequestHandler = async (req, res) => {
+  const result = await dbClient.execute('select 1')
   res.json({
-    user: '123'
+    result: result.rows
   })
 }

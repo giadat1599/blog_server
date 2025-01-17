@@ -26,6 +26,8 @@ module.exports = {
     '',
     '^@/utils/(.*)$',
     '',
+    '^@/env',
+    '',
     '^[./]'
   ],
   plugins: ['@ianvs/prettier-plugin-sort-imports']

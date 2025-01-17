@@ -1,10 +1,13 @@
+import 'dotenv/config'
+
 import { z, ZodError } from 'zod'
 
 const envSchema = z.object({
-  PORT: z.coerce.number().default(3000)
+  PORT: z.coerce.number().default(3000),
+  DATABASE_URL: z.string().url()
 })
 
-export type Env = z.infer<typeof envSchema>
+type Env = z.infer<typeof envSchema>
 
 let env: Env
 
