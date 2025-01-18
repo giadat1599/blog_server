@@ -1,8 +1,8 @@
 import { RequestHandler } from 'express'
-
-import { BAD_REQUEST } from '@/constants/http-status'
 import createHttpError from 'http-errors'
 import { ZodError, ZodSchema } from 'zod'
+
+import { BAD_REQUEST } from '@/constants/http-status'
 
 const validate = (schema: ZodSchema): RequestHandler => {
   return async (req, _, next): Promise<void> => {

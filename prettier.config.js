@@ -8,27 +8,5 @@ module.exports = {
   useTabs: false,
   singleQuote: true,
   printWidth: 120,
-  jsxSingleQuote: true,
-  importOrder: [
-    '^(express/(.*)$)|^(express$)',
-    '',
-    '<THIRD_PARTY_MODULES>',
-    '',
-    '^@/db/(.*)$',
-    '',
-    '^@/services/(.*)$',
-    '',
-    '^@/middlewares/(.*)$',
-    '',
-    '^@/routes/(.*)$',
-    '',
-    '^@/lib/(.*)$',
-    '',
-    '^@/utils/(.*)$',
-    '',
-    '^@/env',
-    '',
-    '^[./]'
-  ],
-  plugins: ['@ianvs/prettier-plugin-sort-imports']
+  jsxSingleQuote: true
 }
