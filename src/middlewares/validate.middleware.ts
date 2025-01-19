@@ -7,11 +7,11 @@ import { BAD_REQUEST } from '@/constants/http-status'
 const validate = (schema: ZodSchema): RequestHandler => {
   return async (req, _, next): Promise<void> => {
     try {
-      await schema.parseAsync(req)
+      await schema.parseAsync(req.body)
       next()
     } catch (error) {
       if (error instanceof ZodError) {
-        next(createHttpError(BAD_REQUEST, error.message))
+        next(createHttpError(BAD_REQUEST, { message: error.flatten().fieldErrors }))
       } else {
         next(error)
       }

@@ -11,13 +11,17 @@
     "prettier": "prettier --check .",
     "prettier:fix": "prettier --write .",
     "prepare": "husky",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "db:migrate:gen": "drizzle-kit generate",
+    "db:migrate:run": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "argon2": "^0.41.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "drizzle-orm": "^0.38.4",

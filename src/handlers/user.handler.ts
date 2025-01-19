@@ -1,10 +1,17 @@
 import { RequestHandler } from 'express'
 
-import dbClient from '@/db/db-client'
+import { createEmailVerificationToken } from '@/services/email_verification_token.service'
+import { RequestEmailVerificationCode } from '@/validations/email_verification_code.validation'
 
-export const getUser: RequestHandler = async (req, res) => {
-  const result = await dbClient.execute('select 1')
-  res.json({
-    result: result.rows
-  })
+export const requestEmailVerificationCode: RequestHandler = async (req, res, next) => {
+  const { email } = req.body as RequestEmailVerificationCode
+  try {
+    const emailVerificationToken = await createEmailVerificationToken(email)
+
+    // TODO: send verification code to user's email
+
+    res.json(emailVerificationToken)
+  } catch (error) {
+    next(error)
+  }
 }
