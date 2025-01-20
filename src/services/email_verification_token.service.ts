@@ -39,3 +39,7 @@ export const createEmailVerificationToken = async (email: string): Promise<Email
 
   return emailVerificationToken
 }
+
+export const deleteEmailVerificationTokenById = async (id: number): Promise<void> => {
+  await dbClient.delete(emailVerificationTokenTable).where(eq(emailVerificationTokenTable.id, id))
+}

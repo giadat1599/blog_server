@@ -1,3 +1,4 @@
+import { InferSelectModel } from 'drizzle-orm'
 import { pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core'
 
 export const userTable = pgTable('users', {
@@ -19,3 +20,5 @@ export const userTable = pgTable('users', {
     .defaultNow()
     .notNull()
 })
+
+export type User = Omit<InferSelectModel<typeof userTable>, 'password' | 'googleId'>
