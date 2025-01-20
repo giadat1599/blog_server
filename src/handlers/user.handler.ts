@@ -2,7 +2,7 @@ import argon2 from 'argon2'
 import { RequestHandler } from 'express'
 import createHttpError from 'http-errors'
 
-import { BAD_REQUEST, CREATED } from '@/constants/http-status'
+import { BAD_REQUEST, CREATED, OK } from '@/constants/http-status'
 import {
   createEmailVerificationToken,
   deleteEmailVerificationTokenById,
@@ -53,4 +53,9 @@ export const signup: RequestHandler = async (req, res, next) => {
   } catch (error) {
     next(error)
   }
+}
+
+export const login: RequestHandler = (req, res) => {
+  // Authentication is handled by Passport
+  res.status(OK).json(req.user)
 }
