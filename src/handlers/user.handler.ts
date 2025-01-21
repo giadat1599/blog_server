@@ -8,7 +8,7 @@ import {
   deleteEmailVerificationTokenById,
   getEmailVerificationToken
 } from '@/services/email_verification_token.service'
-import { createUser, getUserByUsername } from '@/services/user.service'
+import { createUser, getUserById, getUserByUsername } from '@/services/user.service'
 import { RequestEmailVerificationCode } from '@/validations/email_verification_code.validation'
 import { SignUpValues } from '@/validations/signup.validation'
 
@@ -46,10 +46,10 @@ export const signup: RequestHandler = async (req, res, next) => {
 
     const newUser = await createUser({ username, password: hashedPassword, email })
 
-    // TODO: set session/cookie
-
-    // TODO: create util types for response
-    res.status(CREATED).json(newUser)
+    req.logIn(newUser, (error) => {
+      if (error) throw error
+      res.status(CREATED).json(newUser)
+    })
   } catch (error) {
     next(error)
   }
@@ -58,4 +58,17 @@ export const signup: RequestHandler = async (req, res, next) => {
 export const login: RequestHandler = (req, res) => {
   // Authentication is handled by Passport
   res.status(OK).json(req.user)
+}
+
+export const logout: RequestHandler = (req, res) => {
+  console.log(req.user)
+  req.logOut((error) => {
+    if (error) throw error
+    res.sendStatus(OK)
+  })
+}
+
+export const currentUser: RequestHandler = async (req, res) => {
+  const currentUser = await getUserById(req.user!.id!)
+  res.status(OK).json(currentUser)
 }

@@ -22,6 +22,24 @@ export const getUserByUsername = async (username: string): Promise<User> => {
   return user
 }
 
+export const getUserById = async (id: number): Promise<User> => {
+  const [user] = await dbClient
+    .select({
+      id: userTable.id,
+      username: userTable.username,
+      email: userTable.email,
+      displayName: userTable.displayName,
+      avatarUrl: userTable.avatarUrl,
+      createdAt: userTable.createdAt,
+      updatedAt: userTable.updatedAt
+    })
+    .from(userTable)
+    .where(eq(userTable.id, id))
+    .limit(1)
+
+  return user
+}
+
 export const createUser = async (data: Omit<SignUpValues, 'verificationCode'>): Promise<User> => {
   const { username, password, email } = data
   const [newUser] = await dbClient
