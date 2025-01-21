@@ -1,10 +1,9 @@
 import crypto from 'crypto'
 
 import { and, eq } from 'drizzle-orm'
-import createHttpError from 'http-errors'
 
 import dbClient from '@/db/db-client'
-import { EmailVerificationToken, emailVerificationTokenTable, userTable } from '@/db/schemas'
+import { EmailVerificationToken, emailVerificationTokenTable } from '@/db/schemas'
 
 export const getEmailVerificationToken = async (
   email: string,
@@ -21,12 +20,6 @@ export const getEmailVerificationToken = async (
 
 export const createEmailVerificationToken = async (email: string): Promise<EmailVerificationToken> => {
   const code = crypto.randomInt(100000, 999999).toString()
-
-  const [existingEmail] = await dbClient.select().from(userTable).where(eq(userTable.email, email)).limit(1)
-
-  if (existingEmail) {
-    throw createHttpError(409, 'A user with this email address already exists')
-  }
 
   const [emailVerificationToken] = await dbClient
     .insert(emailVerificationTokenTable)

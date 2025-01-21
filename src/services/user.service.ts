@@ -4,6 +4,24 @@ import dbClient from '@/db/db-client'
 import { User, userTable } from '@/db/schemas'
 import { SignUpValues } from '@/validations/signup.validation'
 
+export const getUserByEmail = async (email: string): Promise<User> => {
+  const [user] = await dbClient
+    .select({
+      id: userTable.id,
+      username: userTable.username,
+      email: userTable.email,
+      displayName: userTable.displayName,
+      avatarUrl: userTable.avatarUrl,
+      createdAt: userTable.createdAt,
+      updatedAt: userTable.updatedAt
+    })
+    .from(userTable)
+    .where(eq(userTable.email, email))
+    .limit(1)
+
+  return user
+}
+
 export const getUserByUsername = async (username: string): Promise<User> => {
   const [user] = await dbClient
     .select({
