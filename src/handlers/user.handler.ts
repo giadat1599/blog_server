@@ -22,10 +22,10 @@ export const requestEmailVerificationCode: RequestHandler = asyncHandler(async (
     throw createHttpError(CONFLICT, 'A user with this email address already exists')
   }
 
-  const emailVerificationToken = await createEmailVerificationToken(email)
+  await createEmailVerificationToken(email)
 
   // TODO: send verification code to user's email
-  res.status(CREATED).json(emailVerificationToken)
+  res.sendStatus(CREATED)
 })
 
 export const signup: RequestHandler = asyncHandler(async (req, res) => {
@@ -60,7 +60,6 @@ export const login: RequestHandler = asyncHandler((req, res) => {
 })
 
 export const logout: RequestHandler = asyncHandler((req, res) => {
-  console.log(req.user)
   req.logOut((error) => {
     if (error) throw error
     res.sendStatus(OK)

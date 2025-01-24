@@ -3,8 +3,9 @@ import 'dotenv/config'
 import { z, ZodError } from 'zod'
 
 const envSchema = z.object({
-  PORT: z.coerce.number().default(3000),
+  PORT: z.coerce.number().default(3001),
   DATABASE_URL: z.string().url(),
+  BLOG_CLIENT_URL: z.string().url(),
   SESSION_SECRET: z.string()
 })
 

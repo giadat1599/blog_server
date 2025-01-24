@@ -15,7 +15,12 @@ import userRoutes from '@/routes/user.route'
 const app = createApp()
 
 app.use(requestID())
-app.use(cors())
+app.use(
+  cors({
+    origin: env.BLOG_CLIENT_URL,
+    credentials: true
+  })
+)
 app.use(express.json())
 
 app.use(
@@ -32,7 +37,7 @@ app.get('/', (_, res) => {
   res.status(200).json('Hello Blog API')
 })
 
-app.use('/users', userRoutes)
+app.use('/api/users', userRoutes)
 
 app.use(notFoundHandler)
 app.use(errorHandler)
