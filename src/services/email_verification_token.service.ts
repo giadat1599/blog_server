@@ -5,10 +5,7 @@ import { and, eq } from 'drizzle-orm'
 import dbClient from '@/db/db-client'
 import { EmailVerificationToken, emailVerificationTokenTable } from '@/db/schemas'
 
-export const getEmailVerificationToken = async (
-  email: string,
-  code: string
-): Promise<EmailVerificationToken | undefined> => {
+export const getEmailVerificationToken = async (email: string, code: string): Promise<EmailVerificationToken | undefined> => {
   const [emailVerificationToken] = await dbClient
     .select()
     .from(emailVerificationTokenTable)

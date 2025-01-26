@@ -1,5 +1,4 @@
 import argon2 from 'argon2'
-import { RequestHandler } from 'express'
 import createHttpError from 'http-errors'
 
 import { BAD_REQUEST, CONFLICT, CREATED, OK } from '@/constants/http-status'
@@ -13,7 +12,7 @@ import { createUser, getUserByEmail, getUserById, getUserByUsername } from '@/se
 import { RequestEmailVerificationCode } from '@/validations/email_verification_code.validation'
 import { SignUpValues } from '@/validations/signup.validation'
 
-export const requestEmailVerificationCode: RequestHandler = asyncHandler(async (req, res) => {
+export const requestEmailVerificationCode = asyncHandler(async (req, res) => {
   const { email } = req.body as RequestEmailVerificationCode
 
   const existingEmail = await getUserByEmail(email)
@@ -54,19 +53,19 @@ export const signup = asyncHandler(async (req, res) => {
   })
 })
 
-export const login: RequestHandler = asyncHandler((req, res) => {
+export const login = asyncHandler((req, res) => {
   // Authentication is handled by Passport
   res.status(OK).json(req.user)
 })
 
-export const logout: RequestHandler = asyncHandler((req, res) => {
+export const logout = asyncHandler((req, res) => {
   req.logOut((error) => {
     if (error) throw error
     res.sendStatus(OK)
   })
 })
 
-export const currentUser: RequestHandler = asyncHandler(async (req, res) => {
+export const currentUser = asyncHandler(async (req, res) => {
   const currentUser = await getUserById(req.user!.id!)
   res.status(OK).json(currentUser)
 })

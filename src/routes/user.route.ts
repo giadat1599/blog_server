@@ -10,11 +10,7 @@ import { signupSchema } from '@/validations/signup.validation'
 
 const router = express.Router()
 
-router.post(
-  '/request-verification-code',
-  validate(requestEmailVerificationCodeSchema),
-  userHandlers.requestEmailVerificationCode
-)
+router.post('/request-verification-code', validate(requestEmailVerificationCodeSchema), userHandlers.requestEmailVerificationCode)
 
 router.post('/signup', validate(signupSchema), userHandlers.signup)
 router.post('/login', validate(loginSchema), passport.authenticate('local'), userHandlers.login)
