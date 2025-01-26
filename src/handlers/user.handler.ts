@@ -28,7 +28,7 @@ export const requestEmailVerificationCode: RequestHandler = asyncHandler(async (
   res.sendStatus(CREATED)
 })
 
-export const signup: RequestHandler = asyncHandler(async (req, res) => {
+export const signup = asyncHandler(async (req, res) => {
   const { username, password, email, verificationCode } = req.body as SignUpValues
   const exisitingUser = await getUserByUsername(username)
 

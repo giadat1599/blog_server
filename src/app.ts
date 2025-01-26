@@ -10,6 +10,7 @@ import env from './env'
 import createApp from '@/lib/create_app'
 import errorHandler from '@/middlewares/error.middleware'
 import notFoundHandler from '@/middlewares/not_found.middleware'
+import postRoutes from '@/routes/post.route'
 import userRoutes from '@/routes/user.route'
 
 const app = createApp()
@@ -38,6 +39,7 @@ app.get('/', (_, res) => {
 })
 
 app.use('/api/users', userRoutes)
+app.use('/api/posts', postRoutes)
 
 app.use(notFoundHandler)
 app.use(errorHandler)
