@@ -2,7 +2,7 @@ import { eq } from 'drizzle-orm'
 
 import dbClient from '@/db/db-client'
 import { User, userTable } from '@/db/schemas'
-import { SignUpValues } from '@/validations/signup.validation'
+import { SignUpValues } from '@/validations/body/signup.validation'
 
 export const getUserByEmail = async (email: string): Promise<User> => {
   const [user] = await dbClient

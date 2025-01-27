@@ -9,8 +9,8 @@ import {
   getEmailVerificationToken
 } from '@/services/email_verification_token.service'
 import { createUser, getUserByEmail, getUserById, getUserByUsername } from '@/services/user.service'
-import { RequestEmailVerificationCode } from '@/validations/email_verification_code.validation'
-import { SignUpValues } from '@/validations/signup.validation'
+import { RequestEmailVerificationCode } from '@/validations/body/email_verification_code.validation'
+import { SignUpValues } from '@/validations/body/signup.validation'
 
 export const requestEmailVerificationCode = asyncHandler(async (req, res) => {
   const { email } = req.body as RequestEmailVerificationCode

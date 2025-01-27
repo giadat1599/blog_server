@@ -4,10 +4,10 @@ import { ZodError, ZodSchema } from 'zod'
 
 import { BAD_REQUEST } from '@/constants/http-status'
 
-const validate = (schema: ZodSchema): RequestHandler => {
+const validate = (schema: ZodSchema, which: 'body' | 'params' | 'query' = 'body'): RequestHandler => {
   return async (req, _, next): Promise<void> => {
     try {
-      await schema.parseAsync(req.body)
+      await schema.parseAsync(req[which])
       next()
     } catch (error) {
       if (error instanceof ZodError) {
