@@ -4,9 +4,7 @@ export interface OffetPagination {
   skip: number
 }
 
-export default function getOffsetPagination(rawPage: number = 1, rawLimit: number = 5): OffetPagination {
-  const page = Number(rawPage)
-  const limit = Number(rawLimit)
+export default function getOffsetPagination(page: number = 1, limit: number = 5): OffetPagination {
   const skip = (page - 1) * limit
 
   return {
