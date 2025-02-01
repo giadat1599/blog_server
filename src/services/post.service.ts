@@ -24,3 +24,27 @@ export const getPostsCount = async () => {
   const [result] = await dbClient.select({ count: count() }).from(postTable)
   return result.count
 }
+
+export const getPostBySlug = async (slug: string) => {
+  const post = await dbClient.query.postTable.findFirst({
+    where: eq(postTable.slug, slug),
+    with: {
+      author: {
+        columns: {
+          id: true,
+          username: true,
+          displayName: true,
+          avatarUrl: true
+        }
+      }
+    }
+  })
+  return post
+}
+
+export const getAllSlugs = async () => {
+  const slugs = await dbClient.query.postTable.findMany({
+    columns: { slug: true }
+  })
+  return slugs
+}
