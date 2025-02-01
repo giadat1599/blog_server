@@ -2,6 +2,7 @@ import { OK } from '@/constants/http-status'
 import asyncHandler from '@/middlewares/async_handler.middleware'
 import { getAllSlugs, getPostBySlug, getPosts, getPostsCount } from '@/services/post.service'
 import getOffsetPagination from '@/utils/get_offset_pagination'
+import { GetPostBySlugValues } from '@/validations/param/get_post_by_slug.validation'
 import { PostsPaginationValues } from '@/validations/query/posts_pagination.validation'
 
 export const posts = asyncHandler(async (req, res) => {
@@ -25,7 +26,7 @@ export const posts = asyncHandler(async (req, res) => {
 })
 
 export const post = asyncHandler(async (req, res) => {
-  const { slug } = req.params
+  const { slug } = req.params as GetPostBySlugValues
   const post = await getPostBySlug(slug)
 
   res.status(OK).json(post)
