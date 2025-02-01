@@ -1,5 +1,8 @@
+import { relations } from 'drizzle-orm'
 import { InferSelectModel } from 'drizzle-orm'
 import { pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core'
+
+import { postTable } from './post'
 
 export const userTable = pgTable('users', {
   id: serial('id').primaryKey(),
@@ -20,5 +23,9 @@ export const userTable = pgTable('users', {
     .defaultNow()
     .notNull()
 })
+
+export const userRelation = relations(userTable, ({ many }) => ({
+  posts: many(postTable, { relationName: 'author' })
+}))
 
 export type User = Omit<InferSelectModel<typeof userTable>, 'password' | 'googleId'>

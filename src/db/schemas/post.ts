@@ -6,7 +6,7 @@ import { userTable } from './user'
 export const postTable = pgTable('posts', {
   id: serial('id').primaryKey(),
   title: text('title').notNull(),
-  slug: text('slug').notNull(),
+  slug: text('slug').unique().notNull(),
   summary: text('summary').notNull(),
   body: text('body').notNull(),
   featuredImageUrl: text('featured_image_url').notNull(),
