@@ -15,6 +15,13 @@
       "when": 1738394612224,
       "tag": "0001_exotic_venus",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1738998874500,
+      "tag": "0002_sparkling_omega_flight",
+      "breakpoints": true
     }
   ]
 }

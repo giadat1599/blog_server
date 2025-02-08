@@ -12,7 +12,7 @@ export default function getOffsetPagination(page: number = 1, limit: number = 5,
   const skip = (page - 1) * limit
   const totalPages = Math.ceil(count / limit)
   const hasNextPage = page < totalPages
-  const hasPreviousPage = page > totalPages
+  const hasPreviousPage = page >= 2 && hasNextPage
   return {
     page,
     limit,

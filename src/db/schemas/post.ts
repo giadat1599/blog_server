@@ -1,6 +1,7 @@
 import { relations } from 'drizzle-orm'
 import { serial, pgTable, text, timestamp, integer } from 'drizzle-orm/pg-core'
 
+import { commentTable } from './comment'
 import { userTable } from './user'
 
 export const postTable = pgTable('posts', {
@@ -25,10 +26,13 @@ export const postTable = pgTable('posts', {
     .notNull()
 })
 
-export const postRelation = relations(postTable, ({ one }) => ({
+export const postRelation = relations(postTable, ({ one, many }) => ({
   author: one(userTable, {
     fields: [postTable.authorId],
     references: [userTable.id],
-    relationName: 'author'
+    relationName: 'authorPosts'
+  }),
+  comments: many(commentTable, {
+    relationName: 'postComments'
   })
 }))
